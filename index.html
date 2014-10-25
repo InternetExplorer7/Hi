@@ -106,8 +106,7 @@ loop(100); // Start the loop here, send new word!
       //alert(msg.length);
     //if(list2.length >= 17){$('#messages2 li').first().remove();}
     $('#messages2').append('<li>'+ "[ <strong>" + socket1+"</strong> ] "+msg + '</li>');
-    var el = document.getElementById("#messages2");
-    el.scrollTop = el.scrollHeight;
+    $('#messages2 li').get(-1).scrollIntoView();
 }
 else{console.log('Message was too short!');}
   });
