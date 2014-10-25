@@ -14,6 +14,7 @@ io.on('connection', function(socket){
 	var updatenicknames = function(){
 		io.emit('username', nicknames);
 	}
+		io.emit('Reminder');
 	console.log('new user connected');
 	socket.on('new user', function(data,callback){
 if(nicknames.indexOf(data) != -1){
@@ -22,7 +23,7 @@ if(nicknames.indexOf(data) != -1){
 	callback(true);
 	socket.nickname = data;
 	nicknames.push(socket.nickname);
-	console.log('bout to emit');
+	//console.log('bout to emit');
 	console.log(socket.nickname);
 	updatenicknames();
 }
@@ -30,6 +31,10 @@ if(nicknames.indexOf(data) != -1){
   socket.on('chat message', function(msg){
   	console.log(msg);
     io.emit('chat message', msg, socket.nickname);
+  });
+  socket.on('random message', function(word){
+  	console.log('Sending random message');
+  	io.emit('random message',word);
   });
   socket.on('disconnect' , function(msg){
   	console.log(socket.nickname + " Has disconnected");
